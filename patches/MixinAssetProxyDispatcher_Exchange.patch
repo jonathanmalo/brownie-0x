@@ -1,0 +1,11 @@
+--- _MixinAssetProxyDispatcher.sol	2020-04-09 22:35:32.976667394 -0700
++++ MixinAssetProxyDispatcher.sol	2020-04-09 22:38:02.830326969 -0700
+@@ -22,7 +22,7 @@
+ import "@0x/contracts-utils/contracts/src/LibBytes.sol";
+ import "@0x/contracts-utils/contracts/src/LibRichErrors.sol";
+ import "@0x/contracts-exchange-libs/contracts/src/LibExchangeRichErrors.sol";
+-import "./interfaces/IAssetProxy.sol";
++import "@0x/contracts-asset-proxy/contracts/src/interfaces/IAssetProxy.sol";
+ import "./interfaces/IAssetProxyDispatcher.sol";
+ 
+ 

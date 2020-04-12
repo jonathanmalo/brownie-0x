@@ -1,0 +1,16 @@
+--- _MixinAuthorizable.sol	2020-04-10 14:30:30.324839180 -0700
++++ MixinAuthorizable.sol	2020-04-10 14:35:16.660456090 -0700
+@@ -19,11 +19,11 @@
+ pragma solidity ^0.5.9;
+ 
+ import "../archive/Ownable.sol";
+-import "../src/interfaces/IAuthorizable.sol";
++import "@0x/contracts-utils/contracts/src/interfaces/IAuthorizable.sol";
+ 
+ 
+ contract MixinAuthorizable is
+-    Ownable,
++    Ownable_AssetProxy,
+     IAuthorizable
+ {
+     /// @dev Only authorized addresses can invoke functions with this modifier.

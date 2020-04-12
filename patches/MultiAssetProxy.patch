@@ -1,0 +1,11 @@
+--- _MultiAssetProxy.sol	2020-04-09 21:20:45.070456077 -0700
++++ MultiAssetProxy.sol	2020-04-09 21:27:18.611654238 -0700
+@@ -18,7 +18,7 @@
+  
+ 
+ contract MultiAssetProxy is
+-    MixinAssetProxyDispatcher,
++    MixinAssetProxyDispatcher_AssetProxy,
+     MixinAuthorizable
+ {
+     // Id of this proxy.

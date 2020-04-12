@@ -1,0 +1,11 @@
+--- _Ownable.sol	2020-04-09 22:57:39.087852462 -0700
++++ Ownable.sol	2020-04-09 22:57:53.812930531 -0700
+@@ -3,7 +3,7 @@
+ import "@0x/contracts-utils/contracts/src/interfaces/IOwnable.sol";
+ 
+ 
+-contract Ownable is
++contract Ownable_AssetProxy is
+     IOwnable
+ {
+     address public owner;

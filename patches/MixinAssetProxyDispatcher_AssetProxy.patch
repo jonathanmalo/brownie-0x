@@ -1,0 +1,19 @@
+--- _MixinAssetProxyDispatcher.sol	2020-04-10 12:48:15.759051529 -0700
++++ MixinAssetProxyDispatcher.sol	2020-04-10 12:52:54.183629616 -0700
+@@ -19,12 +19,12 @@
+ pragma solidity ^0.5.9;
+ 
+ import "../archive/Ownable.sol";
+-import "../src/interfaces/IAssetProxy.sol";
+-import "../src/interfaces/IAssetProxyDispatcher.sol";
++import "@0x/contracts-asset-proxy/contracts/src/interfaces/IAssetProxy.sol";
++import "@0x/interfaces/IAssetProxyDispatcher.sol";
+ 
+ 
+-contract MixinAssetProxyDispatcher is
+-    Ownable,
++contract MixinAssetProxyDispatcher_AssetProxy is
++    Ownable_AssetProxy,
+     IAssetProxyDispatcher
+ {
+     // Mapping from Asset Proxy Id's to their respective Asset Proxy

@@ -1,0 +1,11 @@
+--- _MixinSignatureValidator.sol	2020-04-09 20:36:29.281564555 -0700
++++ MixinSignatureValidator.sol	2020-04-09 20:36:18.007501285 -0700
+@@ -26,7 +26,7 @@
+ import "@0x/contracts-exchange-libs/contracts/src/LibZeroExTransaction.sol";
+ import "@0x/contracts-exchange-libs/contracts/src/LibEIP712ExchangeDomain.sol";
+ import "@0x/contracts-exchange-libs/contracts/src/LibExchangeRichErrors.sol";
+-import "./interfaces/IWallet.sol";
++import "@0x/contracts-exchange-libs/contracts/src/IWallet.sol";
+ import "./interfaces/IEIP1271Wallet.sol";
+ import "./interfaces/ISignatureValidator.sol";
+ import "./interfaces/IEIP1271Data.sol";

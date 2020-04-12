@@ -45,7 +45,6 @@ cp ../_brownie-config.yaml ./brownie-config.yaml
 # exclude asset-proxy tests from compilation
 ERC20_TESTS=contracts/exchange/contracts-asset-proxy/contracts/
 mv $ERC20_TESTS/test $ERC20_TESTS/_test
-ASSET_PROXY_ARCHIVE=$LOC_ZX/contracts-asset-proxy/contracts/archive
 cd ../
 
 # patches to prevent namespace conflicts, either by using one 

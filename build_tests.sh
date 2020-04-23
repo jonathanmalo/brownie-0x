@@ -68,5 +68,4 @@ cd ../
 patch $LOC_ZX/contracts-erc20/contracts/src/ZRXToken.sol -i patches/ZRXToken.patch
 
 cd zx
-brownie networks add Development testzx host=http://localhost:8545 cmd=ganache-cli gas_limit=8000000
 brownie test

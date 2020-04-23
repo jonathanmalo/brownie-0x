@@ -28,6 +28,7 @@ class ZXAccount:
     )
     _default_asset_data = ((0).to_bytes(1, byteorder='big') * 20)
     _default_salt = int(time()*1000)
+    _chain_id = CHAIN_ID
     _node = TEST_NODE
     account = None
 
@@ -67,20 +68,20 @@ class ZXAccount:
         else:
             raise Exception("Invalid ZeroEx Exchange Signature")
 
-    def make_zx_order(self,
-                      maker_asset_contract,
-                      maker_asset_amount: Decimal,
-                      taker_asset_contract,
-                      taker_asset_amount: Decimal,
-                      taker_address: str = _default_address,
-                      sender_address: str = _default_address,
-                      fee_recipient_address: str = _default_address,
-                      salt=_default_salt,
-                      maker_fee=0,
-                      taker_fee=0,
-                      expiration_time=_default_zx_order_expiry,
-                      maker_fee_asset_data=_default_asset_data,
-                      taker_fee_asset_data=_default_asset_data):
+    def zx_order(self,
+                 maker_asset_contract,
+                 maker_asset_amount: Decimal,
+                 taker_asset_contract,
+                 taker_asset_amount: Decimal,
+                 taker_address: str = _default_address,
+                 sender_address: str = _default_address,
+                 fee_recipient_address: str = _default_address,
+                 salt=_default_salt,
+                 maker_fee=0,
+                 taker_fee=0,
+                 expiration_time=_default_zx_order_expiry,
+                 maker_fee_asset_data=_default_asset_data,
+                 taker_fee_asset_data=_default_asset_data):
         order = Order(
             makerAddress=self.account.address,
             takerAddress=taker_address,

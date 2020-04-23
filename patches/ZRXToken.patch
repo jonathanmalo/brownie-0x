@@ -1,0 +1,11 @@
+--- _ZRXToken.sol	2020-04-22 01:01:15.167438138 -0700
++++ ZRXToken.sol	2020-04-22 01:01:32.859544376 -0700
+@@ -16,7 +16,7 @@
+ 
+ */
+ 
+-pragma solidity 0.4.11;
++pragma solidity 0.4.22;
+ 
+ 
+ contract Token {

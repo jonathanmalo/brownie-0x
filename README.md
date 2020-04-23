@@ -1,4 +1,6 @@
-`build_tests.sh` clones and patches, then compiles and tests the fillOrder method on the Exchange contract using brownie:
+1. Install Brownie using pipx: `pipx install brownie`
+2. Inject project dependencies: `pipx inject eth-brownie 0x-order-utils`
+3. `build_tests.sh` clones and patches, then compiles and tests the fillOrder method on the Exchange contract using brownie:
 ```
 ./build_tests.sh
 ```

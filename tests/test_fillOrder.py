@@ -10,34 +10,38 @@ from brownie import accounts,\
     WETH9,\
     ZRXToken
 
+from brownie.network.account import LocalAccount
+
 import zx_utils
 
-@pytest.fixture
+@pytest.fixture(scope="module")
 def faucet():
     return accounts[0]
 
-@pytest.fixture
-def exchange(faucet):
-    return faucet.deploy(Exchange, zx_utils.CHAIN_ID)
-
-@pytest.fixture
+@pytest.fixture(scope="module")
 def maker(exchange):
+    accounts.add()
+    assert isinstance(accounts[-1], LocalAccount)
     return zx_utils.ZXAccount(accounts[-1], exchange)
 
-@pytest.fixture
+@pytest.fixture(scope="module")
 def taker(exchange):
+    accounts.add()
+    assert isinstance(accounts[-2], LocalAccount)
     return zx_utils.ZXAccount(accounts[-2], exchange)
 
 def test_fund(faucet, maker, taker):
-    accounts.add()
-    accounts.add()
     cap = 10 ** 18
     faucet.transfer(maker.account, cap)
     faucet.transfer(taker.account, 2 * cap)
-    assert maker.account.balance() >= cap and \
-        taker.account.balance() >= cap
+    assert taker.account.balance() >= cap and \
+        maker.account.balance() >= cap
 
-@pytest.fixture
+@pytest.fixture(scope="module")
+def exchange(faucet):
+    return faucet.deploy(Exchange, zx_utils.CHAIN_ID)
+
+@pytest.fixture(scope="module")
 def erc20proxy(faucet):
     return faucet.deploy(ERC20Proxy)
 
@@ -45,11 +49,11 @@ def test_bridge_proxy(faucet, exchange, erc20proxy):
     assert exchange.registerAssetProxy(erc20proxy, {'from': faucet})
     assert erc20proxy.addAuthorizedAddress(exchange, {'from': faucet})
 
-@pytest.fixture
+@pytest.fixture(scope="module")
 def weth(faucet):
     return faucet.deploy(WETH9)
 
-@pytest.fixture
+@pytest.fixture(scope="module")
 def zrx(faucet):
     return faucet.deploy(ZRXToken)
 
@@ -77,7 +81,6 @@ def test_fillOrder(maker, taker, zrx, weth, exchange):
     getcontext().prec = 23
     fill_amt = Decimal(20)/Decimal(182.76)
     fill = Web3.toWei(fill_amt, 'ether') # amount of weth taker sells in 1st tx
-    taker_initial_balance = zrx.balanceOf(taker.account)
     fee = 10 ** 9
     exchange.fillOrder(order, fill, sig, {'from': taker.account, 'value': fee})
-    assert zrx.balanceOf(taker.account) > taker_initial_balance
+    assert zrx.balanceOf(taker.account) > 0

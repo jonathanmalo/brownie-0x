@@ -15,9 +15,12 @@ taker = zx_utils.ZXAccount(accounts[-2], exchange)
 
 cap = 10 ** 18
 faucet.transfer(maker.account, cap)
-faucet.transfer(taker.account, cap)
+faucet.transfer(taker.account, 2 * cap)
 
 erc20proxy = faucet.deploy(ERC20Proxy)
+exchange.registerAssetProxy(erc20proxy, {'from': faucet})
+erc20proxy.addAuthorizedAddress(exchange, {'from': faucet})
+
 weth = faucet.deploy(WETH9)
 zrx = faucet.deploy(ZRXToken)
 
@@ -25,7 +28,7 @@ allowance = 2 ** 256 - 1
 weth.approve(erc20proxy, allowance, {'from': taker.account})
 zrx.approve(erc20proxy, allowance, {'from': maker.account})
 
-deposit = taker.account.balance()
+deposit = cap
 weth.deposit({'from': taker.account, 'value': deposit})
 amount = 10 ** 21
 zrx.transfer(maker.account, amount, {'from': faucet})
@@ -35,4 +38,5 @@ order = maker.zx_order_struct(order_dict)
 getcontext().prec = 23
 fill_amt = Decimal(20)/Decimal(182.76)
 fill = Web3.toWei(fill_amt, 'ether')
-tx = exchange.fillOrder(order, fill, sig, {'from': taker.account})
+fee = 10 ** 9
+tx = exchange.fillOrder(order, fill, sig, {'from': taker.account, 'value': fee})

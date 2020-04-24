@@ -62,16 +62,12 @@ def test_approve_tokens(maker, taker, weth, zrx, erc20proxy):
 def test_deposit_weth(taker, maker, weth):
     deposit = taker.account.balance()
     weth.deposit({'from': taker.account, 'value': deposit})
-    weth.deposit({'from': maker.account, 'value': deposit})
-    assert weth.balanceOf(taker.account) == deposit and \
-        weth.balanceOf(maker.account) == deposit
+    assert weth.balanceOf(taker.account) == deposit
 
 def test_transfer_zrx(faucet, taker, maker, zrx):
     amount = 10 ** 21
-    zrx.transfer(taker.account, amount, {'from': faucet})
     zrx.transfer(maker.account, amount, {'from': faucet})
-    assert zrx.balanceOf(taker.account) == amount and \
-        zrx.balanceOf(maker.account) == amount
+    assert zrx.balanceOf(maker.account) == amount
 
 def test_fillOrder(maker, taker, zrx, weth, exchange):
     # make an order selling zrx for weth

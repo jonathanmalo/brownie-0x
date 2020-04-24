@@ -56,6 +56,9 @@ sed -i -e 's/\sIAssetProxy/ IAssetProxy_/g' contracts/src/ZrxVault.sol
 
 cd ../../../
 cp ../tests/* tests
+cp ../scripts/* scripts
+cp ../tests/zx_utils.py .
+touch __init__.py
 cp ../_brownie-config.yaml ./brownie-config.yaml
 
 # exclude tests and bridges from compilation
